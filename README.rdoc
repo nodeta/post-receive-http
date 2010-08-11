@@ -1,0 +1,53 @@
+= post-receive-http
+
+This hook sends repository updates using HTTP POST requests.
+The format of the commit payload is the same as Github uses for its service hooks.
+
+== Requirements
+
+* Ruby
+* Some gems: json, grit
+
+== Installation
+
+Download it into your bare repository's hooks/ directory and make it executable
+
+  curl -o hooks/post-receive http://github.com/nodeta/post-receive-http/raw/master/post-receive
+  chmod +x hooks/post-receive
+
+Set the destination URL
+
+  git config httphook.url http://api.flowdock.com/v1/git
+
+You can similarly specify arbitrary parameters to be added in the requests
+
+  git config httphook.api-token FOOBARXYZ123
+
+== Example content
+
+  api_token FOOBARXYZ123
+    payload {
+    "after": "122b95a8808ea0cf708fb43b400a377c25c35d7f", 
+    "before": "2a445d1d348d9d45217cb9c89c12b67d3767ce42", 
+    "commits": [
+      {
+        "added": [], 
+        "author": {
+          "email": "raine.virta@nodeta.fi", 
+          "name": "Raine Virta"
+        }, 
+        "id": "122b95a8808ea0cf708fb43b400a377c25c35d7f", 
+        "message": "yeah!", 
+        "modified": [
+          "TEST_FILE"
+        ], 
+        "removed": [], 
+        "timestamp": "2010-08-11T13:46:39+03:00"
+      }
+    ], 
+    "ref": "refs\/heads\/master", 
+    "ref_name": "master", 
+    "repository": {
+      "name": "testrepo"
+    }
+  }
