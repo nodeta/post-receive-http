@@ -3,6 +3,7 @@
 require 'rubygems'
 require 'grit'
 require 'json'
+require 'net/http'
 
 $repo   = Grit::Repo.new(".")
 $config = Grit::Config.new($repo)
@@ -48,6 +49,20 @@ def hookdata
   end.flatten]
 end
 
+def post(url, data)
+  url = URI.parse(url)
+  http = Net::HTTP.new(url.host, url.port)
+  if url.scheme == 'https'
+    require 'net/https'
+    http.use_ssl = true
+  end
+
+  req = Net::HTTP::Post.new(url.path)
+  req.form_data = data
+  http.request(req)
+end
+
 url  = $config['httphook.url'] or raise 'destination POST URL not set'
 data = { :payload => generate_payload.to_json }.merge(hookdata)
-Net::HTTP.post_form(URI.parse(url), data)
+
+post(url, data)
