@@ -15,6 +15,10 @@ Download it into your bare repository's hooks/ directory and make it executable
   curl -o hooks/post-receive http://github.com/nodeta/post-receive-http/raw/master/post-receive
   chmod +x hooks/post-receive
 
+== Configuration
+
+Using {Flowdock's}[http://www.flowdock.com] Git integration as an example:
+
 Set the destination URL
 
   git config httphook.url http://api.flowdock.com/v1/git
