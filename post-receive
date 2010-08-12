@@ -38,7 +38,7 @@ def generate_payload
 end
 
 def filter(diffs)
-  diffs.select { |e| yield e }.map(&:b_path)
+  diffs.select { |e| yield e }.map { |diff| diff.b_path }
 end
 
 # Gets all 'hookdata' prefixed key-value pairs from git config
