@@ -5,7 +5,7 @@ The format of the commit payload is the same as Github uses for its service hook
 
 == Requirements
 
-* Ruby
+* Ruby (>=1.8.6)
 * Some gems: json, grit
 
 == Installation
