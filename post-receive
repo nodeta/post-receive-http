@@ -45,7 +45,7 @@ end
 # Gets all 'hookdata' prefixed key-value pairs from git config
 def hookdata
   Hash[*$config.keys.grep(/httphook\.(?!url$)/).map do |key|
-    [key.sub(/.*\./, '').tr('-','_').to_sym, $config[key]]
+    [key.sub(/.*\./, '').to_sym, $config[key]]
   end.flatten]
 end
 

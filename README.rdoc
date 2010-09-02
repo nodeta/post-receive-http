@@ -25,7 +25,7 @@ Set the destination URL
 
 You can similarly specify arbitrary parameters to be added in the requests
 
-  git config httphook.api-token FOOBARXYZ123
+  git config httphook.token FOOBARXYZ123
 
 == Example content
 
